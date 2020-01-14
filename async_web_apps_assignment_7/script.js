@@ -1,6 +1,5 @@
-'use strict';
-
 const apiKey = 'dFMna9w3blWuEM3ALGj74AKbbLA3k8VdiZJWfiHy'; 
+//check this url
 const searchURL = `https://developer.nps.gov/api/v1/parks?api_key=${apiKey}`;
 
 function formatQueryParams(params) {
@@ -9,9 +8,9 @@ function formatQueryParams(params) {
     return queryItems.join('&');
   }
 
-function pingParks(stateCode, limit=10) {
+function pingParks(pickState, limit=10) {
     const params = {
-        stateCode: [stateCode],
+        stateCode: pickState,
         limit
     };
     const queryString = formatQueryParams(params)
@@ -57,8 +56,9 @@ function addEventListener() {
         e.preventDefault();
         $('.feedback').text('');
         let searchTerm = $('#search-term').val();
-        let limit = $('#max-results').val();
-        pingParks(searchTerm, limit);
+        let pickState = searchTerm.replace(/\s+/g, '&stateCode=')
+        const limit = $('#max-results').val();
+        pingParks(pickState, limit);
     })
 }
     
