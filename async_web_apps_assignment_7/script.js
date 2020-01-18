@@ -15,7 +15,7 @@ function pingParks(pickState, limit=10) {
     };
     const queryString = formatQueryParams(params)
     const url = searchURL + '&' + queryString;
-
+    console.log(url);
     fetch(url)
     .then(result => result.json())
     .then(resultJson => {
